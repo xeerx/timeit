@@ -1,38 +1,54 @@
 # C++ Timeit
-A quick c++ library to measure code execution time
+A quick c++ library to measure/compare code execution time
 
 ## Features
-- **Easy**  include and just call `timeit()`
+- **Easy**  include and just call `timeit()` or `compareit()`
 - **Fast**  It just calculates the average time in the loop
-- **Light** No lots of code, just one function is written
+- **Light** No lots of code, just two functions is written
 - **CrossPlatform** It doesn't using any third party libraries, so it should work anywhere
 
 ## Syntax
 ```cpp
-timeit(count, function, args).unit();
+// measure time of function
+timeit(count, function, args).unit();   // using any function/arguments type: will return value
+
+// compare time b etween two function
+compareit(count, function1, function2); // using any function type: will print result
+compareit(timeit(..), timeit(..));      // using timeit: will print result
 ```
 
-## Example
+## Example 1: measure time of function
 ```cpp
-#include <iostream>
-#include "timeit.hpp"
-
-void func(int a, int b){ /* do something */ }
-
+void func(int a, int b){ /* ... */ } 
 std::cout << timeit(1000, func, 5, 5).nanoseconds() << "[ns]" << std::endl;
-```
-_result_
-```
-1155144590 [ns]
+// -> 1155144590 [ns]
 ```
 
-## Another Example
+## Example 2: measure time of lambda
 ```cpp
-timit t(1000, func, 5, 5);
-std::cout << t.seconds() << "[s]" << std::endl;
+std::cout << timeit(1000, []{ /* ... */  }).nanoseconds() << "[ns]" << std::endl;
+// -> 1155144590 [ns]
 ```
 
-## Units / Methods
+## Example 3: compare time between two functions
+```cpp
+void func1(){ /* ... */ } 
+void func2(){ /* ... */ }
+compareit(1000,func1,func2);
+// if func1 faster -> [COMPARE IT] first(1546210342)  > second(452181663) x3.419
+// if func2 faster -> [COMPARE IT] second(1546210342) > first(452181663)  x3.419
+```
+
+## Example 4: compare time between two functions using timeit()
+```cpp
+void func1(int a, int b){ /* ... */ } 
+void func2(int a, int b){ /* ... */ }
+compareit(timeit(1000,func1,5,5),timeit(1000,func2,5,5)); // in this case we don't neet to count
+// if func1 faster -> [COMPARE IT] first(1546210342)  > second(452181663) x3.419
+// if func2 faster -> [COMPARE IT] second(1546210342) > first(452181663)  x3.419
+```
+
+## Timeit Class Units/Methods
 - **hours**
 - **minutes**
 - **seconds**
