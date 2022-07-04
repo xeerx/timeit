@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A simple measure time library
- * @version 0.2
+ * @version 0.3
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -14,54 +14,42 @@
 #include <functional>
 #include <chrono>
 
-// DON'T USE IT, IT JUST HELPER FOR THE FUNCTION timeit()
-class timeit_unit_caller
+class timeit
 {
+    // shortcut
+    using cloack = std::chrono::high_resolution_clock;
+
     private:
-    // name of test
-    std::string name;
+    cloack::duration duration {};
 
     public:
-
-    unsigned long int result = {};
-
-    // constructor: init name
-    timeit_unit_caller(std::string n) : name{n} {}
-
-    // print result in seconds
-    void seconds() { std::cout << name << result / 1000 / 1000 / 1000 << "[" << "s" << "]" << std::endl; }
-    // print result in milliseconds
-    void milliseconds() { std::cout << name  << result / 1000 / 1000 << "[" << "ms" << "]" << std::endl; }
-    // print result in microseconds
-    void microseconds() { std::cout << name  << result / 1000 << "[" << "µs" << "]" << std::endl; }
-    // print result in nanoseconds
-    void nanoseconds() { std::cout << name  << result << "[" << "ns" << "]" << std::endl; }
-};
-
-// USE IT WITH ANY TYPE OF FUNCTIONS AND ANY NUMBER/TYPE OF PARAMETERS
-template <class F, typename ...A>
-auto timeit(std::string name, int count, F func, A&& ...args)
-{
-    // create `timeit_unit_caller` class and set name
-    timeit_unit_caller clss("[TIMEIT] [" + name + "]: ");
-    std::chrono::steady_clock::duration total_duration = {};
-
-    // loop
-    for (size_t i = 0; i < count; i++)
+    template <class F, typename ...A>
+    timeit(unsigned int count, F func, A&& ...args) 
     {
-        // get time at beginning
-        auto begin = std::chrono::steady_clock::now();
+        for (size_t i = 0; i < count; i++)
+        {
+            auto begin = cloack::now();
 
-        // execute function
-        func(std::forward<A>(args)...);
+            func(std::forward<A>(args)...);
 
-        // get time at finishing
-        auto end = std::chrono::steady_clock::now();
+            auto end = cloack::now();
 
-        // call `set()` function to push result to results vector
-        total_duration += end - begin;
+            duration += end - begin;
+        }
+
+        duration = duration / count;
     }
 
-    clss.result  = total_duration.count() / count;
-    return clss;
-}
+    auto nanoseconds () { return duration.count();        }
+    auto microseconds() { return nanoseconds   () / 1000; }
+    auto milliseconds() { return microseconds  () / 1000; }
+    auto seconds     () { return milliseconds  () / 1000; }
+    auto minutes     () { return seconds       () / 60;   }
+    auto hours       () { return minutes       () / 60;   }
+
+    auto get         () { return duration;                }
+
+    timeit(const timeit &) = delete;
+    timeit(     timeit &&) = delete;
+    ~timeit             () = default;
+};
