@@ -35,8 +35,8 @@ std::cout << timeit(1000, []{ /* ... */  }).nanoseconds() << "[ns]" << std::endl
 void func1(){ /* ... */ } 
 void func2(){ /* ... */ }
 compareit(1000,func1,func2);
-// if func1 faster -> [COMPARE IT] first(1546210342)  > second(452181663) x3.419
-// if func2 faster -> [COMPARE IT] second(1546210342) > first(452181663)  x3.419
+// if func1 faster  -> [COMPARE IT] first(1546210342)  > second(452181663) x3.419
+// if func2 faster  -> [COMPARE IT] second(1546210342) > first(452181663)  x3.419
 // if func1 = func2 -> [COMPARE IT] second(452181663) = first(452181663)
 ```
 
