@@ -12,7 +12,7 @@ A quick c++ library to measure/compare code execution time
 // measure time of function
 timeit(count, function, args).unit();   // using any function/arguments type: will return value
 
-// compare time between two function
+// compare time between two functions
 compareit(count, function1, function2); // using any function type: will print result
 compareit(timeit(..), timeit(..));      // using timeit: will print result
 ```
@@ -37,15 +37,20 @@ void func2(){ /* ... */ }
 compareit(1000,func1,func2);
 // if func1 faster -> [COMPARE IT] first(1546210342)  > second(452181663) x3.419
 // if func2 faster -> [COMPARE IT] second(1546210342) > first(452181663)  x3.419
+// if func1 = func2 -> [COMPARE IT] second(452181663) = first(452181663)
 ```
 
-## Example 4: compare time between two functions using timeit()
+## Example 4: compare time between two lambda
+```cpp
+compareit(1000,[]{ /* ... */  },[]{ /* ... */  });
+```
+
+
+## Example 5: compare time between two functions using timeit()
 ```cpp
 void func1(int a, int b){ /* ... */ } 
 void func2(int a, int b){ /* ... */ }
 compareit(timeit(1000,func1,5,5),timeit(1000,func2,5,5)); // in this case we don't neet to count
-// if func1 faster -> [COMPARE IT] first(1546210342)  > second(452181663) x3.419
-// if func2 faster -> [COMPARE IT] second(1546210342) > first(452181663)  x3.419
 ```
 
 ## Timeit Class Units/Methods
