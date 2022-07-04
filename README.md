@@ -14,6 +14,7 @@ timeit(count, function, args).unit();
 
 ## Example
 ```cpp
+#include <iostream>
 #include "timeit.hpp"
 
 void func(int a, int b){ /* do something */ }
