@@ -1,6 +1,6 @@
 /**
  * @file    timeit.hpp
- * @brief   A simple measure time library
+ * @brief   A quick c++ library to measure/compare code execution time
  * @version 0.4
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
