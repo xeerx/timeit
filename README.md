@@ -12,7 +12,7 @@ A quick c++ library to measure/compare code execution time
 // measure time of function
 timeit(count, function, args).unit();   // using any function/arguments type: will return value
 
-// compare time b etween two function
+// compare time between two function
 compareit(count, function1, function2); // using any function type: will print result
 compareit(timeit(..), timeit(..));      // using timeit: will print result
 ```
