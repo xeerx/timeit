@@ -17,8 +17,7 @@ class timeit
     // shortcut
     using cloak = std::chrono::high_resolution_clock;
 
-    private:
-    cloak::duration duration {};
+    private: cloak::duration result {};
 
     public:
     template <class F, typename ...A>
@@ -27,26 +26,23 @@ class timeit
         for (size_t i = 0; i < count; i++)
         {
             auto begin = cloak::now();
-
             func(std::forward<A>(args)...);
-
             auto end = cloak::now();
-
-            duration += end - begin;
+            result += end - begin;
         }
 
-        duration = duration / count;
+        result = result / count;
     }
 
-    auto nanoseconds () { return duration.count();        }
+    auto nanoseconds () { return result.count();          }
     auto microseconds() { return nanoseconds   () / 1000; }
     auto milliseconds() { return microseconds  () / 1000; }
     auto seconds     () { return milliseconds  () / 1000; }
     auto minutes     () { return seconds       () / 60;   }
     auto hours       () { return minutes       () / 60;   }
 
-    auto get         () { return duration;                }
-
+    auto duration    () { return result;                  }
+    
     timeit(const timeit &) = delete;
     timeit(     timeit &&) = delete;
     ~timeit             () = default;
