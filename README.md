@@ -1,5 +1,5 @@
 # C++ Timeit
-A quick test to measure code time
+A quick c++ library to measure code execution time
 
 ## Features
 - **Easy**  include and just call `timeit()`
