@@ -16,10 +16,10 @@
 class timeit
 {
     // shortcut
-    using cloack = std::chrono::high_resolution_clock;
+    using cloak = std::chrono::high_resolution_clock;
 
     private:
-    cloack::duration duration {};
+    cloak::duration duration {};
 
     public:
     template <class F, typename ...A>
@@ -27,11 +27,11 @@ class timeit
     {
         for (size_t i = 0; i < count; i++)
         {
-            auto begin = cloack::now();
+            auto begin = cloak::now();
 
             func(std::forward<A>(args)...);
 
-            auto end = cloack::now();
+            auto end = cloak::now();
 
             duration += end - begin;
         }
