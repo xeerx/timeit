@@ -29,3 +29,4 @@ _result_
 - **seconds**
 - **milliseconds**
 - **microseconds**
+- **nanoseconds**
