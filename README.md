@@ -37,7 +37,7 @@ std::cout << t.seconds() << "[s]" << std::endl;
 - **minutes**
 - **seconds**
 - **milliseconds**
-- **microseconds**
+- **microseconds** 
 - **nanoseconds**
 
 - **duration** `std::chrono::high_resolution_clock::duration`
