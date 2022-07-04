@@ -40,4 +40,4 @@ std::cout << t.seconds() << "[s]" << std::endl;
 - **microseconds**
 - **nanoseconds**
 
-- **get** `std::chrono::high_resolution_clock::duration`
+- **duration** `std::chrono::high_resolution_clock::duration`
