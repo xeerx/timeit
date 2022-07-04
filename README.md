@@ -1,6 +1,12 @@
 # Timeit
 A quick test to measure code time
 
+## Features
+- **Easy**  include and just call `timeit()`
+- **Fast**  It just calculates the average time in the loop
+- **Light** No lots of code, just one function is written
+- **CrossPlatform** It doesn't using any third party libraries, so it should work anywhere
+
 ## Syntax
 ```cpp
 timeit(name, count, function, args).unit();
