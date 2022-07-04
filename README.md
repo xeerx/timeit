@@ -1,4 +1,4 @@
-# Timeit
+# C++ Timeit
 A quick test to measure code time
 
 ## Features
@@ -9,7 +9,7 @@ A quick test to measure code time
 
 ## Syntax
 ```cpp
-timeit(name, count, function, args).unit();
+timeit(count, function, args).unit();
 ```
 
 ## Example
@@ -18,15 +18,25 @@ timeit(name, count, function, args).unit();
 
 void func(int a, int b){ /* do something */ }
 
-timeit("test1", 1000, func, 5, 5).microseconds();
+std::cout << timeit(1000, func, 5, 5).nanoseconds() << "[ns]" << std::endl;
 ```
 _result_
 ```
-[TIMEIT] [test1]: 500192[µs]
+1155144590 [ns]
 ```
 
-## Units
+## Another Example
+```cpp
+timit t(1000, func, 5, 5);
+std::cout << t.seconds() << "[s]" << std::endl;
+```
+
+## Units / Methods
+- **hours**
+- **minutes**
 - **seconds**
 - **milliseconds**
 - **microseconds**
 - **nanoseconds**
+
+- **get** `std::chrono::high_resolution_clock::duration`
