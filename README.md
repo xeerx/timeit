@@ -58,8 +58,8 @@ repeatit(3,[]{ compareit(1000,func1,func2); });
 ```
 __result__
 ```
-[COMPARE IT] first(675)  > second(22) x30
-[COMPARE IT] first(697)  > second(22) x31
+[COMPARE IT] first(698)  > second(22) x30
+[COMPARE IT] first(698)  > second(22) x30
 [COMPARE IT] first(698)  > second(23) x30
 ```
 
