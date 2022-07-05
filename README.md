@@ -15,7 +15,6 @@ timeit(count, function, args).unit();   // return value
 
 // compare time between two functions
 compareit(count, function1, function2); // print result
-compareit(timeit(..), timeit(..));      // print result
 
 // repeat function
 repeatit(count, function, args);
