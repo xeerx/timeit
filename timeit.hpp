@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A quick C++ library to measure/compare code execution time
- * @version 0.7.1
+ * @version 0.7.2
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -71,17 +71,6 @@ class compareit
     std::vector<std::size_t> results1 {}, results2 {};
     std::size_t result1 = 0, result2 = 0;
 
-    public:
-    template <class F>
-    compareit(const std::size_t count, const F func1, const F func2) 
-    {
-        if(count == 0) throw std::runtime_error("The count must not be zero");
-
-        calc(results1, result1, count, func1);
-        calc(results2, result2, count, func2);
-        handler();
-    }
-
     template <class F>
     void calc(std::vector<std::size_t>& results, std::size_t& result, const std::size_t count, const F func)
     {
@@ -117,5 +106,16 @@ class compareit
         << "\033[1;33m" << ">" << "\033[0m"
         << "\033[0;34m" << (first_is_max ? " second(" : " first(")  << "\033[1;35m" << (first_is_max ? result2 : result1) << "\033[0;34m" << ") " << "\033[0m"
         << "\033[1;31m" << "x" << std::fixed << std::setprecision(3) << xtimes << "\033[0m \n";
+    }
+
+    public:
+    template <class F>
+    compareit(const std::size_t count, const F func1, const F func2) 
+    {
+        if(count == 0) throw std::runtime_error("The count must not be zero");
+
+        calc(results1, result1, count, func1);
+        calc(results2, result2, count, func2);
+        handler();
     }
 };
