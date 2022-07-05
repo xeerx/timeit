@@ -19,7 +19,7 @@
 #include <stdexcept>    // std::runtime_error
 #include <utility>      // std::pair
 
-double find_median(std::vector<std::size_t> & v) noexcept(false)  
+double medianit(std::vector<std::size_t> & v) noexcept(false)  
 {
     if(v.empty()) throw std::runtime_error("The vector must not be empty");
     
@@ -52,7 +52,7 @@ class timeit
             results.push_back((end - begin).count());
         }
 
-        result = find_median(results);
+        result = medianit(results);
     }
 
     std::size_t nanoseconds () { return result;                  }
@@ -82,7 +82,7 @@ class compareit
 
         for (std::size_t i = 0; i < 10; i++) results.push_back(timeit(count,func).nanoseconds());
 
-        result = find_median(results);
+        result = medianit(results);
     }
 
     void handler() noexcept
