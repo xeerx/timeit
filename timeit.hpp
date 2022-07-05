@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A quick C++ library to measure/compare code execution time
- * @version 0.7.3
+ * @version 0.7.4
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -48,12 +48,12 @@ class timeit
         results.clear();
     }
 
-    std::size_t nanoseconds () { return result;                  }
-    std::size_t microseconds() { return nanoseconds   () / 1000; }
-    std::size_t milliseconds() { return microseconds  () / 1000; }
-    std::size_t seconds     () { return milliseconds  () / 1000; }
-    std::size_t minutes     () { return seconds       () / 60;   }
-    std::size_t hours       () { return minutes       () / 60;   }
+    constexpr std::size_t nanoseconds () noexcept { return result;                  }
+    constexpr std::size_t microseconds() noexcept { return nanoseconds   () / 1000; }
+    constexpr std::size_t milliseconds() noexcept { return microseconds  () / 1000; }
+    constexpr std::size_t seconds     () noexcept { return milliseconds  () / 1000; }
+    constexpr std::size_t minutes     () noexcept { return seconds       () / 60;   }
+    constexpr std::size_t hours       () noexcept { return minutes       () / 60;   }
 };
 
 
@@ -72,7 +72,7 @@ class compareit
     std::size_t result1 = 0, result2 = 0;
 
     template <class F>
-    void calc(std::vector<std::size_t>& results, std::size_t& result, const std::size_t count, const F func)
+    void calc(std::vector<std::size_t>& results, std::size_t& result, const std::size_t count, const F func) noexcept
     {
         for (std::size_t i = 0; i < 10; i++) results.push_back(timeit(count,func).nanoseconds());
 
@@ -82,7 +82,7 @@ class compareit
         results.clear();
     }
 
-    void handler()
+    void handler() noexcept
     {
         if(result1 == result2) 
         {
@@ -94,11 +94,11 @@ class compareit
             return;
         }
 
-        std::pair<std::size_t, std::size_t> bounds = std::minmax(result1,result2);
+        const std::pair<std::size_t, std::size_t> bounds = std::minmax(result1,result2);
         
-        auto xtimes = (static_cast<std::size_t>(bounds.second) / bounds.first);
+        const std::size_t xtimes = bounds.first == 0 ? 1 : (bounds.second / bounds.first);
         
-        bool first_is_max = bounds.second == result1;
+        const bool first_is_max = bounds.second == result1;
 
         std::cout 
         << "\033[1;33m" << "[COMPARE IT]" << "\033[0m"
@@ -110,7 +110,7 @@ class compareit
 
     public:
     template <class F>
-    compareit(const std::size_t count, const F func1, const F func2) 
+    compareit(const std::size_t count, const F func1, const F func2)
     {
         if(count == 0) throw std::runtime_error("The count must not be zero");
 
