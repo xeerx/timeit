@@ -28,8 +28,9 @@ to get the
 
 ## High Resolution
 
-**[NOTE]** to get `High Resolution` run your code in termianl, recommended `valgrind`
-**[NOTE]** when running code in an IDE like `vscode` the results often won't be correct
+- **to get `High Resolution` run your code in termianl, recommended `valgrind`**
+
+- **when running code in an IDE like `vscode` the results often won't be correct**
 
 ### `timeit()`
 ```cpp
