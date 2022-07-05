@@ -20,7 +20,7 @@ compareit(timeit(..), timeit(..));      // print result
 // repeat function
 repeatit(count, function, args);
 
-// find median function [Helper Function]
+// find median value in vector [Helper Function]
 double medianit(std::vector<std::size_t> & v);
 ```
 
