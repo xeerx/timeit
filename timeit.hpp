@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A quick C++ library to measure/compare code execution time
- * @version 0.7.2
+ * @version 0.7.3
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -29,7 +29,7 @@ class timeit
 
     public:
     template <class F, typename ...A>
-    timeit(const std::size_t count, const F func, const A&& ...args) 
+    timeit(const std::size_t count, const F func, A&& ...args) 
     {
         if(count == 0) throw std::runtime_error("The count must not be zero");
 
@@ -58,7 +58,7 @@ class timeit
 
 
 template <class F, typename ...A>
-void repeatit(const std::size_t count, const F func, const A&& ...args)
+void repeatit(const std::size_t count, const F func, A&& ...args)
 {
     for (std::size_t i = 0; i < count; i++) func(std::forward<A>(args)...);
 }
