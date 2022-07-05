@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
- * Distributed under the MIT License (MIT) 
+ * Distributed under the MIT License (MIT)
 */
 
 #pragma once
