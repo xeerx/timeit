@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A quick C++ library to measure/compare code execution time
- * @version 0.8
+ * @version 0.8.1
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -72,8 +72,6 @@ void repeatit(const std::size_t count, const F func, A&& ...args)
 
 class compareit
 {
-    using clock = std::chrono::steady_clock;
-
     private:
     std::size_t func1_result = 0, func2_result = 0;
 
