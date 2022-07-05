@@ -26,16 +26,16 @@ repeatit(count, function, args);
 ### `timeit()`
 ```cpp
 // simple function to test
-void func() { auto a = (1000000 * 400) / 5000; }
+void func() { for (auto i = 0; i < 10; i++) sqrt(i); }
 
 // repeat `timeit()` 3 times with same values
-repeatit(3,[]{ std::cout << timeit(10000, func).nanoseconds() << std::endl; });
+repeatit(3,[]{ std::cout << timeit(1000, func).nanoseconds() << std::endl; });
 ```
 __result__
 ```
-21
+22
 22 
-21
+22
 ```
 
 ### `compareit()`
