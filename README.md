@@ -1,12 +1,12 @@
 # C++ Timeit
-A quick c++ library to measure/compare code execution time
+A quick C++ library to measure/compare code execution time
 
 ## Features
 - **High Resolution** using a perfect algorithm to get the best result
 - **Easy**  include and just call `timeit()` or `compareit()`
 - **Fast**  It just loop to find the median result
 - **Light** No lots of code, just simple little functions
-- **CrossPlatform** It doesn't using any third party libraries, so it should work anywhere
+- **CrossPlatform** It doesn't use any third party libraries, so it should work anywhere
 
 ## Syntax
 ```cpp
