@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A quick C++ library to measure/compare code execution time
- * @version 0.7.5
+ * @version 0.7.6
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -48,12 +48,12 @@ class timeit
         results.clear();
     }
 
-    constexpr std::size_t nanoseconds () noexcept { return result;                  }
-    constexpr std::size_t microseconds() noexcept { return nanoseconds   () / 1000; }
-    constexpr std::size_t milliseconds() noexcept { return microseconds  () / 1000; }
-    constexpr std::size_t seconds     () noexcept { return milliseconds  () / 1000; }
-    constexpr std::size_t minutes     () noexcept { return seconds       () / 60;   }
-    constexpr std::size_t hours       () noexcept { return minutes       () / 60;   }
+    std::size_t nanoseconds () { return result;                  }
+    std::size_t microseconds() { return nanoseconds   () / 1000; }
+    std::size_t milliseconds() { return microseconds  () / 1000; }
+    std::size_t seconds     () { return milliseconds  () / 1000; }
+    std::size_t minutes     () { return seconds       () / 60;   }
+    std::size_t hours       () { return minutes       () / 60;   }
 };
 
 
