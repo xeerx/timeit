@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
  * @brief   A quick c++ library to measure/compare code execution time
- * @version 0.6
+ * @version 0.7
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -15,6 +15,8 @@
 #include <vector>       // std::vector
 #include <algorithm>    // std::nth_element
 #include <cstddef>      // std::size_t
+#include <iomanip>      // std::setprecision
+#include <stdexcept>    // std::runtime_error
 
 class timeit
 {
@@ -28,6 +30,8 @@ class timeit
     template <class F, typename ...A>
     timeit(std::size_t count, F func, A&& ...args) 
     {
+        if(count == 0) throw std::runtime_error("The count must not be zero");
+
         for (std::size_t i = 0; i < count; i++)
         {
             auto begin = clock::now();
@@ -70,6 +74,8 @@ class compareit
     template <class F>
     compareit(std::size_t count, F func1, F func2) 
     {
+        if(count == 0) throw std::runtime_error("The count must not be zero");
+
         calc(results1, result1, count, func1);
         calc(results2, result2, count, func2);
         handler();
@@ -88,30 +94,27 @@ class compareit
 
     void handler()
     {
-        std::size_t max = 0, min = 0;
-        if(result1 > result2) { max = result1; min = result2; } else if(result1 < result2) { max = result2; min = result1; } 
-        else 
+        if(result1 == result2) 
         {
             std::cout 
             << "\033[1;33m" << "[COMPARE IT]" << "\033[0m"
             << "\033[0;34m" << " first(" << "\033[1;35m" << result1 << "\033[0;34m" << ") " << "\033[0m"
             << "\033[1;33m" << "=" << "\033[0m"
-            << "\033[0;34m" << " second(" << "\033[1;35m" << result2 << "\033[0;34m" << ") " << "\033[0m" << std::endl;
+            << "\033[0;34m" << " second(" << "\033[1;35m" << result2 << "\033[0;34m" << ") " << "\033[0m \n";
             return;
         }
+
+        std::pair<std::size_t, std::size_t> bounds = std::minmax(result1,result2);
         
-        auto tot = (max + min);
-        auto diff = (max - min);
-        // auto percent = (static_cast<std::size_t>(diff) / tot) * 100;
-        auto percent = (static_cast<std::size_t>(max) / min);
+        auto xtimes = (static_cast<std::size_t>(bounds.second) / bounds.first);
         
-        bool t1Max = max == result1 ? true : false;
+        bool first_is_max = bounds.second == result1;
 
         std::cout 
         << "\033[1;33m" << "[COMPARE IT]" << "\033[0m"
-        << "\033[0;34m" << (t1Max ? " first(" : " second(") << "\033[1;35m" << (t1Max? result1 : result2) << "\033[0;34m" << ") " << "\033[0m"
+        << "\033[0;34m" << (first_is_max ? " first(" : " second(")  << "\033[1;35m"  << (first_is_max? result1 : result2) << "\033[0;34m" << ") " << "\033[0m"
         << "\033[1;33m" << ">" << "\033[0m"
-        << "\033[0;34m" << (t1Max ? " second(" : " first(")  << "\033[1;35m" << (t1Max ? result2 : result1) << "\033[0;34m" << ") " << "\033[0m"
-        << "\033[1;31m" << "x" << std::fixed << std::setprecision(3) << percent << "\033[0m" << std::endl;
+        << "\033[0;34m" << (first_is_max ? " second(" : " first(")  << "\033[1;35m" << (first_is_max ? result2 : result1) << "\033[0;34m" << ") " << "\033[0m"
+        << "\033[1;31m" << "x" << std::fixed << std::setprecision(3) << xtimes << "\033[0m \n";
     }
 };
