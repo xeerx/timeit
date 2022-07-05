@@ -24,10 +24,16 @@ double medianit(std::vector<std::size_t> & v) noexcept(false)
     if(v.empty()) throw std::runtime_error("The vector must not be empty");
     
     const auto middleItr = v.begin() + v.size() / 2;
+
     std::nth_element(v.begin(), middleItr, v.end());
-    if (v.size() % 2 == 0) {
-    const auto leftMiddleItr = std::max_element(v.begin(), middleItr);
-    return (*leftMiddleItr + *middleItr) / 2.0; } else { return *middleItr; }
+
+    if (v.size() % 2 == 0) 
+    {
+        const auto leftMiddleItr = std::max_element(v.begin(), middleItr);
+        return (*leftMiddleItr + *middleItr) / 2.0; 
+    } 
+
+    return static_cast<double>(*middleItr);
 }
 
 class timeit
