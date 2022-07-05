@@ -17,6 +17,7 @@
 #include <cstddef>      // std::size_t
 #include <iomanip>      // std::setprecision
 #include <stdexcept>    // std::runtime_error
+#include <utility>      // std::pair
 
 class timeit
 {
