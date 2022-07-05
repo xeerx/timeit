@@ -4,7 +4,7 @@ A quick C++ library to measure/compare code execution time
 ## Features
 - **High Resolution** using a perfect algorithm to get the best result
 - **Easy**  include and just call `timeit()` or `compareit()`
-- **Fast**  It just loop to find the median result
+- **Fast**  It just loop and find the median result
 - **Light** No lots of code, just simple little functions
 - **CrossPlatform** It doesn't use any third party libraries, so it should work anywhere
 
@@ -19,6 +19,9 @@ compareit(timeit(..), timeit(..));      // print result
 
 // repeat function
 repeatit(count, function, args);
+
+// find median function [Helper Function]
+double medianit(std::vector<std::size_t> & v);
 ```
 
 ## High Resolution
