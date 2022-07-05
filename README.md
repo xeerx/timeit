@@ -23,7 +23,13 @@ repeatit(count, function, args);
 double medianit(std::vector<std::size_t> & v);
 ```
 
+## Very important note
+to get the 
+
 ## High Resolution
+
+**[NOTE]** to get `High Resolution` run your code in termianl, recommended `valgrind`
+**[NOTE]** when running code in an IDE like `vscode` the results often won't be correct
 
 ### `timeit()`
 ```cpp
