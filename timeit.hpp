@@ -1,7 +1,7 @@
 /**
  * @file    timeit.hpp
- * @brief   A quick c++ library to measure/compare code execution time
- * @version 0.7
+ * @brief   A quick C++ library to measure/compare code execution time
+ * @version 0.7.1
  *
  * Copyright (c) 2022 Maysara Elshewehy (xeerx.com) (maysara.elshewehy@gmail.com)
  *
@@ -29,7 +29,7 @@ class timeit
 
     public:
     template <class F, typename ...A>
-    timeit(std::size_t count, F func, A&& ...args) 
+    timeit(const std::size_t count, const F func, const A&& ...args) 
     {
         if(count == 0) throw std::runtime_error("The count must not be zero");
 
@@ -58,7 +58,7 @@ class timeit
 
 
 template <class F, typename ...A>
-void repeatit(std::size_t count, F func, A&& ...args)
+void repeatit(const std::size_t count, const F func, const A&& ...args)
 {
     for (std::size_t i = 0; i < count; i++) func(std::forward<A>(args)...);
 }
@@ -73,7 +73,7 @@ class compareit
 
     public:
     template <class F>
-    compareit(std::size_t count, F func1, F func2) 
+    compareit(const std::size_t count, const F func1, const F func2) 
     {
         if(count == 0) throw std::runtime_error("The count must not be zero");
 
@@ -83,7 +83,7 @@ class compareit
     }
 
     template <class F>
-    void calc(std::vector<std::size_t>& results, std::size_t& result, std::size_t count, F func)
+    void calc(std::vector<std::size_t>& results, std::size_t& result, const std::size_t count, const F func)
     {
         for (std::size_t i = 0; i < 10; i++) results.push_back(timeit(count,func).nanoseconds());
 
