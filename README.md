@@ -25,7 +25,7 @@ double medianit(std::vector<std::size_t> & v);
 
 ## High Resolution
 
-- **to get `High Resolution` run your code in termianl, recommended `valgrind`**
+- **to get `High Resolution` run your code in termianl
 
 - **when running code in an IDE like `vscode` the results often won't be correct**
 
